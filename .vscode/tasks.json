@@ -7,6 +7,14 @@
 			"type": "npm",
 			"script": "build",
 			"problemMatcher": [
+				"$tsc"
+			],
+			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "watch",
+			"problemMatcher": [
 				"$tsc-watch"
 			],
 			"isBackground": true
