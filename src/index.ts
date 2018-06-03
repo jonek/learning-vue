@@ -1,30 +1,40 @@
 import Vue from "vue";
-import MyComponent from './MyComponent';
+import MyCanvas from './MyCanvas';
 import FontSelector from './components/FontSelector.vue';
 import PaletteSelector from './components/PaletteSelector.vue';
-import Hello from './components/Hello.vue';
+import { Font } from './components/fonts';
 import './index.css';
 
 let v = new Vue({
     el: "#app",
     template: `
     <div>
-        <hello></hello>
-        <h3>Hello {{name}}!</h3>
-        Name: <input v-model="name" type="text">
-        <div><greeter :name="name"></greeter></div>
+        <myCanvas message="Foo bar baz!" :font="font" :background="palette[0]" :foreground="palette[3]"></myCanvas>
         <div class="tools">
-            <font-selector></font-selector>
-            <paletteSelector></paletteSelector>
+            <font-selector v-on:font-selected="updateFont($event)"></font-selector>
+            <palette-selector v-on:palette-selected="updatePalette($event)"></palette-selector>
         </div>
     </div>`,
     data: {
-        name: "World"
+        font: <Font> {},
+        palette: <string[]> []
+    },
+    methods: {
+        updateFont(font: Font) {
+            this.font = font;
+            this.log(font);
+        },
+        updatePalette(palette: string[]) {
+            this.palette = palette;
+            this.log(palette);
+        },
+        log(e: any): void {
+            console.log(`got event: ${JSON.stringify(e)}`);
+        }
     },
     components: {
-        'greeter': MyComponent,
+        'myCanvas': MyCanvas,
         'fontSelector': FontSelector,
-        'paletteSelector': PaletteSelector,
-        'hello': Hello
+        'paletteSelector': PaletteSelector
     }
 });

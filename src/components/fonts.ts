@@ -1,3 +1,8 @@
+export interface Font {
+	readonly familyName: string;
+	readonly genericFamily: string;
+}
+
 export const FONTS = [
 	{
 		familyName: 'Exo 2',

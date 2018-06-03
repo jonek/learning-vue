@@ -19,8 +19,8 @@
 			</tr>
 		</table>
 		<div class="debug">
-			<div>{{ selectedIndex }}</div>
-			<div>{{ getSelectedFont() }}</div>
+			<div>index: {{ selectedIndex }}</div>
+			<pre>{{ getSelectedFont() }}</pre>
 		</div>
 	</div>
 </template>
@@ -42,6 +42,7 @@ export default Vue.extend({
 		foo(e: any, index: number): void {
 			console.log(e.target.tagName, index);
 			this.selectedIndex = index;
+			this.$emit('font-selected', this.getSelectedFont() );
 		},
 		selected(index: number): string {
 			return index === this.selectedIndex ? 'selected' : '';
@@ -78,6 +79,9 @@ export default Vue.extend({
 	p {
 		font-size: 2em;
 		text-align: center;
+	}
+	pre {
+		margin: 0;
 	}
 	.font-name {
 		font-weight: normal;

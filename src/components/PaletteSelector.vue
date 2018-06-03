@@ -21,8 +21,8 @@
 			</tr>
 		</table>
 		<div class="debug">
-			<div>{{ selectedIndex }}</div>
-			<div>{{ getSelectedPalette() }}</div>
+			<div>index: {{ selectedIndex }}</div>
+			<pre>{{ getSelectedPalette() }}</pre>
 		</div>
 	</div>
 </template>
@@ -44,6 +44,7 @@ export default Vue.extend({
 		foo(e: any, index: number): void {
 			console.log(e.target.tagName, index);
 			this.selectedIndex = index;
+			this.$emit('palette-selected', this.getSelectedPalette());
 		},
 		selected(index: number): string {
 			return index === this.selectedIndex ? 'selected' : '';
@@ -80,6 +81,9 @@ export default Vue.extend({
 	p {
 		font-size: 2em;
 		text-align: center;
+	}
+	pre {
+		margin: 0;
 	}
 	.font-name {
 		font-weight: normal;
